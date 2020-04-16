@@ -16,7 +16,7 @@ function getArea(figureType, ...values){
     else if(figureType == 'trapezoid') ret = getTrapezoid(...values);
     
     if(ret === undefined || isNaN(ret)) return ARG_ERROR_MSG;
-    return ret;
+    return ret.toFixed(0);
 }
 
 function getCircleArea(radius){
@@ -31,9 +31,16 @@ function getTrapezoid(upperSide, lowerSide, height){
     return upperSide * lowerSide * height;
 }
 
-function getAreaAvg(){
+function getAreaAvg(figureType, startValue, endValue){
+    let ret = 0;
+    
+    for(let currentValue = startValue; currentValue <= endValue; ++currentValue)
+        ret += Number(getArea(figureType, currentValue));
+    
+    return ret / (endValue - startValue + 1);
 }
 
 console.log(getArea('circle', 10, 3.14));
 console.log(getArea('parallelogram', 10, 15));
 console.log(getArea('trapezoid', 10));
+console.log(getAreaAvg('circle', 5, 11));
