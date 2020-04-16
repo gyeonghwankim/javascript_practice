@@ -8,15 +8,21 @@
 const figureTypes = ['circle', 'parallelogram', 'trapezoid'];
 const ARG_ERROR_MSG = '오류 발생! 올바른 인자값 입력해주세요';
 
+const executionSequence = [];
+
 function getArea(figureType, ...values){
     let ret;
+
+    if(!figureTypes.includes(figureType)) return ARG_ERROR_MSG;
+
+    executionSequence.push(figureType);
 
     if(figureType === 'circle') ret = getCircleArea(...values);
     else if(figureType === 'parallelogram') ret = getParallelogramArea(...values);
     else if(figureType == 'trapezoid') ret = getTrapezoid(...values);
     
     if(ret === undefined || isNaN(ret)) return ARG_ERROR_MSG;
-    return ret.toFixed(0);
+    return ret;
 }
 
 function getCircleArea(radius){
@@ -40,7 +46,12 @@ function getAreaAvg(figureType, startValue, endValue){
     return ret / (endValue - startValue + 1);
 }
 
+function printExecutionSequence(){
+    console.log('계산 수행 순서 : ' + executionSequence.join(' > '));
+}
+
 console.log(getArea('circle', 10, 3.14));
 console.log(getArea('parallelogram', 10, 15));
 console.log(getArea('trapezoid', 10));
+printExecutionSequence();
 console.log(getAreaAvg('circle', 5, 11));
