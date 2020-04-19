@@ -60,12 +60,26 @@ Array.prototype.customForEach = function(callback){
     innerFunc(0);
 }
 
+Array.prototype.customMap = function(callback){
+    const innerFunc = (currentIndex) => {
+        if(currentIndex == this.length) return;
+        this[currentIndex] = callback(this[currentIndex]);
+        innerFunc(currentIndex+1);
+    }
+    innerFunc(0);
+}
+
 const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
 const result = words.customFilter(word => word.length > 6);
 console.log(result)
 
 const array1 = ['a', 'b', 'c'];
 array1.customForEach(element => console.log(element));
+
+const array2 = [1, 4, 9, 16];
+const map1 = array2.customMap(x => x * 2);
+console.log(map1);
+
 /*
 console.log(getMatchedType(exampleData, "samsung"));
 console.log(getMatchedType(exampleData, "lg"));
