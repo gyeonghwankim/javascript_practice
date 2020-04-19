@@ -9,11 +9,16 @@ const exampleData = require('./exampleData');
 
 function getMatchedType(json, type){
     const matchedName = [];
-
-    const getName = (_json, _type) => _json.forEach(element => {
-        if(element.type === type) matchedName.push(`"${element.name}"`);
-        getName(element.childnode, _type);        
-    });
+    
+    const getName = (_json, _type) => {
+        _json.customReduce((accumulator, currentValue) => {
+            if(_type === currentValue.type) {
+                accumulator.push(`"${currentValue.name}"`);
+            }
+            if(currentValue.childnode) {getName(currentValue.childnode, _type)};
+            return accumulator;
+        }, matchedName)
+    }
 
     getName(json, type);
 
