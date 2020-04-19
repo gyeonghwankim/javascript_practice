@@ -40,7 +40,7 @@ Array.prototype.customReduce = function(callback, initialValue){
     return innerFunc(initialValue, index);
 }
 
-Array.prototype.customFilter = function(callback, thisArg= this){
+Array.prototype.customFilter = function(callback){
     const ret = [];
     const innerFunc = (currentIndex) => {
         if(currentIndex == this.length) return;
@@ -51,10 +51,21 @@ Array.prototype.customFilter = function(callback, thisArg= this){
     return ret;
 }
 
+Array.prototype.customForEach = function(callback){
+    const innerFunc = (currentIndex) => {
+        if(currentIndex == this.length) return;
+        callback(this[currentIndex])
+        innerFunc(currentIndex+1);
+    }
+    innerFunc(0);
+}
+
 const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
 const result = words.customFilter(word => word.length > 6);
 console.log(result)
 
+const array1 = ['a', 'b', 'c'];
+array1.customForEach(element => console.log(element));
 /*
 console.log(getMatchedType(exampleData, "samsung"));
 console.log(getMatchedType(exampleData, "lg"));
