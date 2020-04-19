@@ -1,4 +1,4 @@
-const jsonData= [{
+const data= [{
 	"id": 1,
 	"name": "noah",
 	"phone": "010-0000-0000",
@@ -79,4 +79,4 @@ const jsonData= [{
 	}]
 }];
 
-module.exports = jsonData;
+module.exports = data;
