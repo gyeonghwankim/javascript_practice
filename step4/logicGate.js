@@ -14,3 +14,13 @@ const xor = (paramA, paramB) => (!paramA && paramB) || (paramA && !paramB);
 
 
 // exampleInput.forEach((currentValue) => console.log(`NAND(${currentValue}) => ${nand(...currentValue)}`));
+
+const halfAdder = (byteA, byteB) => [byteA && byteB, xor(byteA, byteB)];
+const fullAdder = (byteA, byteB, carry) => [(byteA && byteB) || xor(byteA, byteB) && carry, xor(xor(byteA, byteB),carry)];
+
+(() => {
+    const boolCase = [true, false];
+    console.log(boolCase.length);
+    for(let i = 0; i < boolCase.length; ++i)
+        exampleInput.forEach((currentValue)=>console.log(`fullAdder(${currentValue},${boolCase[i]} => ${fullAdder(...currentValue, boolCase[i])})`));
+})();
