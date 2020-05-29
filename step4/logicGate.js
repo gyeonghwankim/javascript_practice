@@ -4,6 +4,7 @@
     1. BOOL 타입의 매개변수를 두 개 가지고 결과값으로 BOOL 타입을 리턴하는 NAND, NOR, XOR를 구현
     2. half-adder, full-adder 구현
     3. 10진수에서 2진수로, 2진수에서 10진수로 변환하는 함수 구현
+    4. 8비트 덧셈기 구현
 */
 
 const exampleInput = [ [true, true], [true, false], [false, true], [false, false]];
@@ -31,9 +32,20 @@ function bin2dec(bin) {
     return bin.reduce((accumulator, currentValue, currentIndex) => accumulator + currentValue * Math.pow(2, currentIndex), 0);
 }
 
-console.log(dec2bin(175));
-console.log(bin2dec(dec2bin(175)));
+function byteAdder(byteA, byteB) {
+    const ret = [];
+    let carry = 0, sum;
+    for(let i = 0; i < byteA.length; ++i){
+        [carry, sum] = fullAdder(byteA[i], byteB[i], carry).map((currentValue) => currentValue === true ? 1 : 0);
+        ret.push(sum);
+    }
+    ret.push(carry);
+    return ret;
+}
+let byteA = [ 1, 1, 0, 0, 1, 0, 1, 0 ];
+let byteB = [ 1, 1, 0, 1, 1, 0, 0, 1 ];
 
+console.log(byteAdder(byteA, byteB));
 
 /*
 exampleInput.forEach((currentValue) => console.log(`NAND(${currentValue}) => ${nand(...currentValue)}`));
@@ -44,4 +56,7 @@ exampleInput.forEach((currentValue) => console.log(`NAND(${currentValue}) => ${n
     for(let i = 0; i < boolCase.length; ++i)
         exampleInput.forEach((currentValue)=>console.log(`fullAdder(${currentValue},${boolCase[i]} => ${fullAdder(...currentValue, boolCase[i])})`));
 })();
+
+console.log(dec2bin(175));
+console.log(bin2dec(dec2bin(175)));
 */
