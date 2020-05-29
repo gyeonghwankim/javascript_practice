@@ -67,6 +67,7 @@ Array.prototype.customMap = function(callback){
         innerFunc(currentIndex+1);
     }
     innerFunc(0);
+    return this;
 }
 
 const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
