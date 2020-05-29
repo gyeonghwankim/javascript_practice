@@ -12,11 +12,31 @@ const nand = (paramA, paramB) => !(paramA && paramB);
 const nor = (paramA, paramB) => !(paramA || paramB);
 const xor = (paramA, paramB) => (!paramA && paramB) || (paramA && !paramB);
 
-
-// exampleInput.forEach((currentValue) => console.log(`NAND(${currentValue}) => ${nand(...currentValue)}`));
-
 const halfAdder = (byteA, byteB) => [byteA && byteB, xor(byteA, byteB)];
 const fullAdder = (byteA, byteB, carry) => [(byteA && byteB) || xor(byteA, byteB) && carry, xor(xor(byteA, byteB),carry)];
+
+
+function dec2bin(decimal) {
+    let answer = [];
+    let currentValue = decimal;
+
+    while(currentValue){
+        answer.push(currentValue % 2);
+        currentValue = parseInt(currentValue/2);
+    }
+    return answer.length < 1 ? [0] : answer;
+}
+
+function bin2dec(bin) {
+    return bin.reduce((accumulator, currentValue, currentIndex) => accumulator + currentValue * Math.pow(2, currentIndex), 0);
+}
+
+console.log(dec2bin(175));
+console.log(bin2dec(dec2bin(175)));
+
+
+/*
+exampleInput.forEach((currentValue) => console.log(`NAND(${currentValue}) => ${nand(...currentValue)}`));
 
 (() => {
     const boolCase = [true, false];
@@ -24,3 +44,4 @@ const fullAdder = (byteA, byteB, carry) => [(byteA && byteB) || xor(byteA, byteB
     for(let i = 0; i < boolCase.length; ++i)
         exampleInput.forEach((currentValue)=>console.log(`fullAdder(${currentValue},${boolCase[i]} => ${fullAdder(...currentValue, boolCase[i])})`));
 })();
+*/
