@@ -4,9 +4,9 @@
         * current : 현재의 세 가지 상태(todo, doing, done)
         * todo : Todo list의 item
     
-    2. add$$item$$["tag1", "tag2"] : tag1, tag2의 태그를 가진 item을 todo 상태를 추가한다
+    2. add$$action$$["tag1", "tag2"] : tag1, tag2의 태그를 가진 action을 todo 상태를 추가한다
 
-    3. update$$idNumber$$state : idNumber에 해당하는 id를 가진 Todo item을 state 상태로 변경한다
+    3. update$$idNumber$$status : idNumber에 해당하는 id를 가진 Todo item을 status 상태로 변경한다
 
     4. delete$$idNumber : idNumber에 해당하는 id를 가진 Todo item을 목록에서 삭제한다.
 
