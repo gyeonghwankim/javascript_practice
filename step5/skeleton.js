@@ -15,15 +15,9 @@
 show와 quit를 제외한 명령어를 처리한 이후에 알림 메세지와 show$$current를 실행한다
 */
 
-function enterTheCommand(command){
-    입력된 command에 해당하는 명령 수행(show, add, update, delete, quit)
-    명령이 수행 후 알림메세지 출력
-    command가 show와 quit이 아닌경우 show 명령어로 현재 상태를 콘솔에 출력
-}
-
-function show(type){
-    type이 current일 경우 todo, doing, done 세 가지 상태를 콘솔에 출력
-    type이 todo일 경우 todo 상태에 있는 item의 총 갯수와 각각의 item contents, item id 콘솔에 출력
+function show(status){
+    status가 current일 경우 todo, doing, done 세 가지 상태를 콘솔에 출력
+    status가 todo일 경우 todo 상태에 있는 item의 총 갯수와 각각의 item contents, item id 콘솔에 출력
 }
 
 function add(contents, tags){
@@ -31,8 +25,8 @@ function add(contents, tags){
     생성한 ID 값과 contents, tags를 가지는 객체를 todo 상태에 추가
 }
 
-function update(id, state){
-    id에 해당하는 item의 상태를 state로 변경
+function update(id, status){
+    id에 해당하는 item의 상태를 status로 변경
 }
 
 function delete(id){
