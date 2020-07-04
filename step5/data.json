@@ -1,0 +1,13 @@
+[
+    {
+        "id": 123,
+        "tags": ["favorite", "programming"],
+        "action": "자바스크립트 공부하기"
+    },
+
+    {
+        "id": 124,
+        "tags": ["apple", "mobile"],
+        "action": "ios 공부하기"
+    }
+]
