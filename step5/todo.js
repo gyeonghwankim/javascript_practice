@@ -20,7 +20,20 @@ const data = require('./data.json');
 
 
 function show(type){
-    console.log(`show 함수가 실행되었습니다. 표시할 status는 ${type}입니다.`)
+    if(type === 'current'){
+        const ret = data.reduce((acc, cur) => {
+            acc[cur.status].push(cur.id);
+            return acc;
+        }, {"todo": [], "doing": [], "done": []});
+        console.log(`현재 상태는 todo:[${ret.todo.join(', ')}], doing:[${ret.doing.join(', ')}], done:[${ret.done.join(', ')}]`);
+    }
+    else{
+        const ret = data.reduce((acc, cur)=>{
+            if(cur.status === type) acc.push(cur.action);
+            return acc;
+        }, [])
+        console.log(`총 ${ret.length}개 : ${ret.join(', ')}`);
+    }
 }
 
 function add(contents, tags){
@@ -33,7 +46,6 @@ function update(id, status){
 
 function del(id){
     console.log(`del 함수가 실행되었습니다. ${id}값을 가진 항목을 삭제합니다.`)
-
 }
 
 const rl = readline.createInterface({
