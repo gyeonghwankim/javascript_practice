@@ -14,3 +14,55 @@ Step5 대화형 할일관리 프로그램
 8. add 명령에서는 tag를 n개로 받을 수 있다.
 9. update 시에는 2초 delay후에 화면에 결과가 출력된다.
 */
+
+const readline = require('readline');
+const data = require('./data.json');
+
+
+function show(type){
+    console.log(`show 함수가 실행되었습니다. 표시할 status는 ${type}입니다.`)
+}
+
+function add(contents, tags){
+    console.log(`add 함수가 실행되었습니다. ${tags} 태그를 가진 todo 상태를 가지는 ${contents} 항목을 data에 추가합니다.`)
+}
+
+function update(id, status){
+    console.log(`update 함수가 실행되었습니다. id값이 ${id}에 해당하는 항목의 status를 ${status}로 변경합니다.`)
+}
+
+function del(id){
+    console.log(`del 함수가 실행되었습니다. ${id}값을 가진 항목을 삭제합니다.`)
+
+}
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.setPrompt('명령어를 입력하세요 : ');
+rl.prompt();
+  
+rl.on('line', (command) => {
+    const params = command.split('$$');
+    
+    switch(params[0]){
+        case 'show':
+            show(params[1]);
+            break;
+        case 'add':
+            add(...params.slice(1));
+            break;
+        case 'update':
+            update();
+            break;
+        case 'delete':
+            del();
+            break;
+        case 'quit':
+            process.exit();
+    }
+
+    rl.prompt();
+});
