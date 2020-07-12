@@ -18,7 +18,6 @@ Step5 대화형 할일관리 프로그램
 const readline = require('readline');
 const data = require('./data.json');
 
-
 function show(type){
     if(type === 'current'){
         const ret = data.reduce((acc, cur) => {
@@ -37,7 +36,9 @@ function show(type){
 }
 
 function add(contents, tags){
-    console.log(`add 함수가 실행되었습니다. ${tags} 태그를 가진 todo 상태를 가지는 ${contents} 항목을 data에 추가합니다.`)
+    const newID = generateID();
+    data.push({"id": newID, "status": "todo", "tags": tags, "action": contents});
+    console.log(`${contents}가 추가되었습니다. (ID : ${newID})`);
 }
 
 function update(id, status){
@@ -47,6 +48,16 @@ function update(id, status){
 function del(id){
     console.log(`del 함수가 실행되었습니다. ${id}값을 가진 항목을 삭제합니다.`)
 }
+
+function generateID(){
+    const idList = data.map(e => e.id);
+    while(idList.includes(generateID.count)){
+        generateID.count += 1;
+    }
+    return generateID.count;
+}
+
+generateID.count = 1;
 
 const rl = readline.createInterface({
     input: process.stdin,
