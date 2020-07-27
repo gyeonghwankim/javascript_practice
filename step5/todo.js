@@ -16,7 +16,7 @@ Step5 대화형 할일관리 프로그램
 */
 
 const readline = require('readline');
-const data = require('./data.json');
+let data = require('./data.json');
 
 function show(type){
     if(type === 'current'){
@@ -42,23 +42,23 @@ function add(contents, tags){
 }
 
 function update(id, status){
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         setTimeout(() => {
             data.forEach(element => {
                 if(element.id === Number(id)){
                     element.status = status;        
-                    console.log(`update 함수가 실행되었습니다. id값이 ${id}에 해당하는 항목의 status를 ${status}로 변경합니다.`);
+                    console.log(`ID ${id}번 ${element.action} 항목의 상태를 ${status}로 변경합니다.`);
                 }
             });
             resolve();
         }, 2000);
-        
     })
-    
 }
 
 function del(id){
-    console.log(`del 함수가 실행되었습니다. ${id}값을 가진 항목을 삭제합니다.`)
+    const ret = data.filter(e => e.id != id );
+    console.log(`ID ${id}번 항목을 제거합니다.`);
+    return ret;
 }
 
 function generateID(){
@@ -94,7 +94,8 @@ rl.on('line', async function(command) {
             show('current');
             break;
         case 'delete':
-            del();
+            data = del(params[1]);
+            show('current');
             break;
         case 'quit':
             process.exit();
