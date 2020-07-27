@@ -42,7 +42,19 @@ function add(contents, tags){
 }
 
 function update(id, status){
-    console.log(`update 함수가 실행되었습니다. id값이 ${id}에 해당하는 항목의 status를 ${status}로 변경합니다.`)
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            data.forEach(element => {
+                if(element.id === Number(id)){
+                    element.status = status;        
+                    console.log(`update 함수가 실행되었습니다. id값이 ${id}에 해당하는 항목의 status를 ${status}로 변경합니다.`);
+                }
+            });
+            resolve();
+        }, 2000);
+        
+    })
+    
 }
 
 function del(id){
@@ -67,7 +79,7 @@ const rl = readline.createInterface({
 rl.setPrompt('명령어를 입력하세요 : ');
 rl.prompt();
   
-rl.on('line', (command) => {
+rl.on('line', async function(command) {
     const params = command.split('$$');
     
     switch(params[0]){
@@ -78,7 +90,8 @@ rl.on('line', (command) => {
             add(...params.slice(1));
             break;
         case 'update':
-            update();
+            await update(...params.slice(1));
+            show('current');
             break;
         case 'delete':
             del();
