@@ -18,6 +18,16 @@ Step5 대화형 할일관리 프로그램
 const readline = require('readline');
 let data = require('./data.json');
 
+const HELP_MSG = `
+====================================================== How To Use ======================================================
+Command     Parameters                                  Description
+show    $$  'current' or 'todo' or 'doing' or 'done'    Display items corresponding to the status
+add     $$  Contents  $$  TAG1  $$ TAG2  $$ ...         Add the item with contents and tags
+update  $$  ID  $$ Status                               Update the status of the item corresponding to the ID
+delete  $$  ID                                          Delete the item corresponding to the ID
+quit                                                    Process exit
+========================================================================================================================`
+
 function show(type){
     if(type === 'current'){
         const ret = data.reduce((acc, cur) => {
@@ -76,12 +86,13 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+console.log(HELP_MSG);
 rl.setPrompt('명령어를 입력하세요 : ');
 rl.prompt();
   
 rl.on('line', async function(command) {
     const params = command.split('$$');
-    
+
     switch(params[0]){
         case 'show':
             show(params[1]);
